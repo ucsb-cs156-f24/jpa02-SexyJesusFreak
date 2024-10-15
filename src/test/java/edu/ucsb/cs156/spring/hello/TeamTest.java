@@ -25,53 +25,43 @@ public class TeamTest {
         assertEquals("Team(name=test-team, members=[])", team.toString());
     }
     
-    // Test case 1: Same object
     @Test
-    public void equals_sameObject_returnsTrue() {
-        assert(team.equals(team));
+    public void testEquals_sameObject() {
+        // Case 1: Same object
+        assertTrue(team.equals(team));
     }
 
-    // Test case 2: Different class
     @Test
-    public void equals_differentClass_returnsFalse() {
-        assert(team.equals("not a team"));
+    public void testEquals_differentClass() {
+        // Case 2: Different class
+        String notATeam = "I am not a team";
+        assertFalse(team.equals(notATeam));
     }
 
-    // Test case 3.1: Different name, same members
     @Test
-    public void equals_differentName_returnsFalse() {
-        Team other = new Team("different-name");
-        other.setMembers(new ArrayList<>());
-        assert(team.equals(other));
+    public void testEquals_bothFieldsEqual() {
+        // Case 3: Both name and members are equal
+        assert(team.equals(sameTeam));
     }
 
-    // Test case 3.2: Same name, different members
     @Test
-    public void equals_differentMembers_returnsFalse() {
-        Team other = new Team("test-team");
-        ArrayList<String> differentMembers = new ArrayList<>();
-        differentMembers.add("member1");
-        other.setMembers(differentMembers);
-        assert(team.equals(other));
+    public void testEquals_nameEqual_membersNotEqual() {
+        // Case 3: Name is equal, but members are not
+        assert(team.equals(differentTeamMembers));
     }
 
-    // Test case 3.3: Different name, different members
     @Test
-    public void equals_differentNameAndMembers_returnsFalse() {
-        Team other = new Team("different-name");
-        ArrayList<String> differentMembers = new ArrayList<>();
-        differentMembers.add("member1");
-        other.setMembers(differentMembers);
-        assert(team.equals(other));
+    public void testEquals_nameNotEqual_membersEqual() {
+        // Case 3: Name is not equal, but members are equal
+        assert(team.equals(differentTeamName));
     }
 
-    // Test case 3.4: Same name, same members
     @Test
-    public void equals_sameNameAndMembers_returnsTrue() {
-        Team other = new Team("test-team");
-        other.setMembers(new ArrayList<>());
-        assert(team.equals(other));
+    public void testEquals_bothFieldsNotEqual() {
+        // Case 3: Both name and members are not equal
+        assert(team.equals(differentTeamNameAndMembers));
     }
+
     // TODO: Add additional tests as needed to get to 100% jacoco line coverage, and
     // 100% mutation coverage (all mutants timed out or killed)
 
