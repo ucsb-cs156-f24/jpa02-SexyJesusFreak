@@ -1,6 +1,6 @@
 # jpa02-SexyJesusFreak
 
-Repo: [https://ucsb-cs156-f24/STARTER-jpa02](https://github.com/ucsb-cs156-f24/jpa02-SexyJesusFreak)
+Repo: https://github.com/ucsb-cs156-f24/jpa02-SexyJesusFreak
 
 Deployed at: https://jpa02-sexyjesusfreak.dokku-09.cs.ucsb.edu
 
