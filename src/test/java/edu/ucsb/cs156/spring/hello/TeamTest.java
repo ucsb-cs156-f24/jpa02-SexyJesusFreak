@@ -25,42 +25,74 @@ public class TeamTest {
         assertEquals("Team(name=test-team, members=[])", team.toString());
     }
     
-    @Test
-    public void testEquals_sameObject() {
-        // Case 1: Same object
-        assertTrue(team.equals(team));
-    }
+@Test
+public void testEquals_SameObjectAndDifferentClass() {
+    // Case 1: Test that equals returns true when comparing the same object
+    Team team = new Team("test-team");
+    assertEquals(team.equals(team), true); // Same object
 
-    @Test
-    public void testEquals_differentClass() {
-        // Case 2: Different class
-        String notATeam = "I am not a team";
-        assertFalse(team.equals(notATeam));
-    }
+    // Case 2: Test that equals returns false when comparing to an object of a different class
+    assertEquals(team.equals("wrong"), false); // Different class
+}
 
-    @Test
-    public void testEquals_bothFieldsEqual() {
-        // Case 3: Both name and members are equal
-        assert(team.equals(sameTeam));
-    }
+@Test
+public void testEquals_BothNameAndMembersEqual() {
+    // Case 3: Test when both the name and members are the same (should return true)
+    Team team1 = new Team("correct");
+    Team team2 = new Team("correct");
+    team1.addMember("correct");
+    team2.addMember("correct");
+    assertEquals(team1.equals(team2), true); // Both name and members are equal
+}
 
-    @Test
-    public void testEquals_nameEqual_membersNotEqual() {
-        // Case 3: Name is equal, but members are not
-        assert(team.equals(differentTeamMembers));
-    }
+@Test
+public void testEquals_NameEqualButMembersNotEqual() {
+    // Case 3: Test when the name is the same, but members are different (should return false)
+    Team team1 = new Team("correct");
+    Team team2 = new Team("correct");
+    team1.addMember("correct");
+    team2.addMember("wrong");
+    assertEquals(team1.equals(team2), false); // Name is equal, but members are different
+}
 
-    @Test
-    public void testEquals_nameNotEqual_membersEqual() {
-        // Case 3: Name is not equal, but members are equal
-        assert(team.equals(differentTeamName));
-    }
+@Test
+public void testEquals_NameNotEqualButMembersEqual() {
+    // Case 3: Test when the name is different, but members are the same (should return false)
+    Team team1 = new Team("correct");
+    Team team2 = new Team("wrong");
+    team1.addMember("correct");
+    team2.addMember("correct");
+    assertEquals(team1.equals(team2), false); // Name is different, but members are equal
+}
 
-    @Test
-    public void testEquals_bothFieldsNotEqual() {
-        // Case 3: Both name and members are not equal
-        assert(team.equals(differentTeamNameAndMembers));
-    }
+@Test
+public void testEquals_BothNameAndMembersNotEqual() {
+    // Case 3: Test when both the name and members are different (should return false)
+    Team team1 = new Team("correct");
+    Team team2 = new Team("wrong");
+    team1.addMember("correct");
+    team2.addMember("wrong");
+    assertEquals(team1.equals(team2), false); // Both name and members are different
+}
+
+@Test
+public void testHashCode_SameContent() {
+    // Test that two teams with the same name and members have the same hash code
+    Team team1 = new Team("jun");
+    team1.addMember("yoon");
+    Team team2 = new Team("jun");
+    team2.addMember("yoon");
+    assertEquals(team1.hashCode(), team2.hashCode()); // Same content should produce the same hash code
+}
+
+@Test
+public void testHashCode_DefaultTeam() {
+    // Test the hash code of a default team (without name and members)
+    Team team = new Team();
+    int actualHashCode = team.hashCode();
+    int expectedHashCode = 1; // Assuming the default hash code is 1 as per implementation
+    assertEquals(expectedHashCode, actualHashCode); // Verify the hash code for the default team
+}
 
     // TODO: Add additional tests as needed to get to 100% jacoco line coverage, and
     // 100% mutation coverage (all mutants timed out or killed)
